@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
 
         onPressed: () async {
           FocusScope.of(context).requestFocus(new FocusNode());
-          if (!formKey.currentState!.validate()) {
+          if (formKey.currentState?.validate()!=true) {
             return;
           }
           isVisible=true;

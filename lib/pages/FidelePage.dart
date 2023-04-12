@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../controllers/UserCtrl.dart';
 import '../controllers/UserCtrl.dart';
 import '../utils/Stockage.dart';
+import 'FormPage.dart';
 import 'LogiPage.dart';
 
 class FidelePage extends StatefulWidget {
@@ -52,11 +53,24 @@ class _FidelePageState extends State<FidelePage> {
             onPressed: () {
               var userCtrl = context.read<UserCtrl>();
               userCtrl.stockage?.remove(Stockage.userKey);
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => FormPage()));
+            },
+            color: Colors.black,
+            icon: Tooltip(
+                message: 'Ajouter',
+                child: Icon(Icons.add))),
+        IconButton(
+            onPressed: () {
+              var userCtrl = context.read<UserCtrl>();
+              userCtrl.stockage?.remove(Stockage.userKey);
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (_) => LoginPage()));
             },
             color: Colors.black,
-            icon: Icon(Icons.exit_to_app))
+            icon: Tooltip(
+                message: "Se deconnecter",
+                child: Icon(Icons.exit_to_app)))
       ],
     );
   }

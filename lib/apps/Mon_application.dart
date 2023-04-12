@@ -4,6 +4,7 @@ import 'package:gestion_fidele/pages/BrouillonsPage.dart';
 import 'package:gestion_fidele/pages/Demo.dart';
 import 'package:gestion_fidele/pages/DemoC.dart';
 import 'package:gestion_fidele/pages/FidelePage.dart';
+import 'package:gestion_fidele/pages/FormPage.dart';
 import 'package:gestion_fidele/pages/listeFidele.dart';
 import 'package:gestion_fidele/pages/LogiPage.dart';
 import 'package:gestion_fidele/pages/splashscreen.dart';
@@ -30,7 +31,7 @@ class MonApplication extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: user != null ? FidelePage() : LoginPage(),
+        home: user != null ? LoginPage() : LoginPage(),
       ),
     );
   }
