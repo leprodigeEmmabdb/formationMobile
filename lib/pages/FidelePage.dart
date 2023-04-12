@@ -97,7 +97,14 @@ class _FidelePageState extends State<FidelePage> {
                 return ListTile(
                     title: Text("${f.nom}"),
                     subtitle: Text("${f.prenom}"),
-                    trailing: Icon(Icons.arrow_right),
+                    trailing: IconButton(
+                        onPressed: () {
+                          var userCtrl = context.read<UserCtrl>();
+                          userCtrl.stockage?.remove(Stockage.userKey);
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (_) => FormPage(fidele_id: f.id,)));
+                        },
+                    icon: Icon(Icons.edit)),
                     leading: f.image != null ? Image.network(
                         "${Constance.BASE_URL}/${f.image}") : Icon(Icons.error),
                     onLongPress: ()

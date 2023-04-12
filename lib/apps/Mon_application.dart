@@ -25,13 +25,13 @@ class MonApplication extends StatelessWidget {
     print(user);
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => FideleCtrl()),
+        ChangeNotifierProvider(create: (_) => FideleCtrl(stockage: box)),
         ChangeNotifierProvider(create: (_) => UserCtrl(stockage: box)),
         ChangeNotifierProvider(create: (_) => EventCtrl()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: user != null ? LoginPage() : LoginPage(),
+        home: user != null ? FidelePage() : LoginPage(),
       ),
     );
   }

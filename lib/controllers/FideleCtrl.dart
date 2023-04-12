@@ -3,7 +3,9 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:gestion_fidele/utils/Constance.dart';
+import 'package:gestion_fidele/utils/Stockage.dart';
 import 'package:gestion_fidele/utils/requetes.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import '../models/FidelModele.dart';
 import '../utils/Constance.dart';
@@ -11,6 +13,9 @@ import '../utils/Constance.dart';
 class FideleCtrl with ChangeNotifier {
   List<FidelModele> fideles = [];
   bool loading = false;
+  GetStorage? stockage;
+  FideleCtrl({this.stockage});
+
 
   Future<bool> envoieDonneesAuth(Map data) async {
     var url = Uri.parse("${Constance.BASE_URL}${Constance.authEndpoint}");
@@ -27,18 +32,25 @@ class FideleCtrl with ChangeNotifier {
 
   void recupererDataAPI() async {
     var url = "${Constance.BASE_URL}${Constance.fidelesEndpoint}";
-
     loading = true;
-    print(url);
     notifyListeners();
     var reponse = await getData(url);
     if (reponse != null) {
-      List<FidelModele> temp = reponse
+      List<FidelModele> tmp = reponse
           .map<FidelModele>((data) => FidelModele.fromJson(data))
           .toList();
-      fideles = temp;
+      fideles = tmp;
+      stockage?.write(Stockage.fidelesKey, reponse);
       notifyListeners();
     }
+    else{
+      var dataStockee=stockage?.read(Stockage.fidelesKey) ;
+      var tmp=dataStockee.map<FidelModele>((e)=> FidelModele.fromJson(e)).toList();
+      fideles = tmp;
+      print("Mes donnees : $tmp");
+    }
+    loading=false;
+    notifyListeners();
   }
 }
 

@@ -17,8 +17,10 @@ import '../controllers/FideleCtrl.dart';
 import '../utils/Constance.dart';
 
 class FormPage extends StatefulWidget {
+  int? fidele_id;
   @override
   State<FormPage> createState() => _LoginPageState();
+  FormPage({this.fidele_id});
 }
 
 class _LoginPageState extends State<FormPage> {
@@ -33,9 +35,32 @@ class _LoginPageState extends State<FormPage> {
   var age = TextEditingController();
   final ImagePicker picker = ImagePicker();
   XFile? imageSelectionner;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      var fideleCtrl = context.read<FideleCtrl>();
+      var data=fideleCtrl.recupererDataAPI();
+      var fidele=fideleCtrl.fideles.where((f) => f.id ==widget.fidele_id ).toList();
+      if(fidele.length!=0){
+        var tmp=fidele[0];
+        firstname = TextEditingController(text: tmp.prenom);
+        name = TextEditingController(text: tmp.nom);
+        age = TextEditingController(text: tmp.age.toString());
+        setState(() {
+
+        });
+      }
+
+    });
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
+    var userCtrl = context.read<UserCtrl>();
     return Scaffold(
       appBar: AppBar(
         title: Text("Enregistrement"),
@@ -139,7 +164,7 @@ class _LoginPageState extends State<FormPage> {
       height: 50,
       child: ElevatedButton(
         onPressed: _validateFormulaire,
-        child: Text("Ajouter un fidele"),
+        child: Text(widget.fidele_id==null? "Créer": "Modifier"),
         style: ElevatedButton.styleFrom(
             primary: Colors.orange,
             shape: RoundedRectangleBorder(

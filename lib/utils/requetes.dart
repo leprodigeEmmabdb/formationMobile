@@ -7,7 +7,7 @@ import '../models/FidelModele.dart';
 Future<dynamic> getData(String url_api) async {
   try{
     var url= Uri.parse(url_api);
-    var reponse= await http.get(url);
+    var reponse= await http.get(url).timeout(Duration(seconds:5));
     //List<Map> data= jsonDecode(reponse.body); // contient le resultat de la response
     // print(data);
     //
