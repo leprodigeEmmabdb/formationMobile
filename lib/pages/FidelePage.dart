@@ -11,6 +11,7 @@ import '../controllers/UserCtrl.dart';
 import '../utils/Stockage.dart';
 import 'FormPage.dart';
 import 'LogiPage.dart';
+import 'ProfilPage.dart';
 
 class FidelePage extends StatefulWidget {
   const FidelePage({Key? key}) : super(key: key);
@@ -94,7 +95,10 @@ class _FidelePageState extends State<FidelePage> {
                 //var f = FidelModele.fromJson(fidele);
 
                 //  return Text("${f.id}");
-                return ListTile(
+                return ListTile(onTap:(){
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => ProfilPage(fidele_id: f.id,)));
+                } ,
                     title: Text("${f.nom}"),
                     subtitle: Text("${f.prenom}"),
                     trailing: IconButton(
