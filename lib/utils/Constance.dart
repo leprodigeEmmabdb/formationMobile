@@ -1,6 +1,6 @@
 
 class Constance{
-  static String BASE_URL="http://10.252.252.46/emmanuelbdb/";
+  static String BASE_URL="http://10.252.252.56/emmanuelbdb/";
   static String fidelesEndpoint="/fideles.php";
   static String authEndpoint="/authentification.php";
 

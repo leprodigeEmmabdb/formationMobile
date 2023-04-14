@@ -7,6 +7,7 @@ import 'package:gestion_fidele/Widget/Chargement.dart';
 import 'package:gestion_fidele/controllers/FideleCtrl.dart';
 import 'package:gestion_fidele/controllers/UserCtrl.dart';
 import 'package:gestion_fidele/pages/FidelePage.dart';
+import 'package:gestion_fidele/utils/requetes.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -178,21 +179,25 @@ class _LoginPageState extends State<FormPage> {
 //}
 
   void _validateFormulaire () async {
+    var fidelctrl=context.watch<FideleCtrl>();
     print(firstname.text);
     print(firstname.text);
     print(firstname.text);
     FocusScope.of(context).requestFocus(new FocusNode());
 
-    if(formKey.currentState?.validate()!=true){
-      return;
+    if(formKey.currentState?.validate()==true){
+      Map dataAenvoyer={
+        "Nom":firstname.text,
+        "Prenom":name.text,
+        "Age":int.parse(age.text),
+        "Image":"",
+      };
+
+
     }
 
-    Map dataAenvoyer={
-      "Nom":firstname.text,
-      "Prenom":name.text,
-      "Age":int.parse(age.text),
-      "Image":"",
-    };
+
+
 
 
   }

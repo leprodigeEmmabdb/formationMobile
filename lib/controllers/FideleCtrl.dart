@@ -30,6 +30,7 @@ class FideleCtrl with ChangeNotifier {
     return false;
   }
 
+
   void recupererDataAPI() async {
     var url = "${Constance.BASE_URL}${Constance.fidelesEndpoint}";
     loading = true;
